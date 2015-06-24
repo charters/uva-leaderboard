@@ -2,9 +2,19 @@ var express = require('express');
 var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
+var ejs = require('ejs');
 var app = express();
 
-app.get('/scrape', function(req, res){
+var port = process.env.PORT || 8080;
+
+app.use(express.static(__dirname + '/public'));
+
+app.get('/', function(req, res){
+	res.sendFile(__dirname + '/public/leaderboard.html')
+});
+
+
+app.get('/api/scrape', function(req, res){
 	var leaderboard = [];
 	completed_request = 0;
 
@@ -52,13 +62,12 @@ app.get('/scrape', function(req, res){
 	});
 
 function storeLeaderboard() {
-	fs.writeFile( "leaderboard.json", JSON.stringify(leaderboard), "utf8");
+	res.json(leaderboard);
+	fs.writeFile( "public/leaderboard.json", JSON.stringify(leaderboard), "utf8");
 	console.log('File successfully updated.')
 }
-
-res.send('Check your console!')
 });
 
-app.listen('8081')
-console.log('Show me the MONEY');
-exports = module.exports = app;
+app.listen(port, function(){
+	console.log('Our app is running on http://localhost:' + port);
+});
