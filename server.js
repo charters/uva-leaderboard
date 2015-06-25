@@ -26,6 +26,7 @@ app.get('/api/scrape', function(req, res){
 				if (!error && response.statusCode == 200) {
 					var $ = cheerio.load(html);
 					var fundraiser_name = $('div.profile_wrapper strong').text();
+					var fundraiser_url = response.request.uri.href;
 					var raised_amount = 0;
 					var current = 0;
 					$('table.recent_donations_table td').each(function(i, elem) {
@@ -38,15 +39,19 @@ app.get('/api/scrape', function(req, res){
 							var parts = text.split(" ");
 							var date = parts[2];
 							date = parseInt(date.substring(0, date.length - 1));
-							if (date >= 22){
+							if (date >= 24){
 								raised_amount += current;
 							}
 
+						}
+						else if (text.indexOf("July") > -1) {
+							raised_amount += current;
 						}
 					});
 
 					var fundraiser_data = {
 						name: fundraiser_name,
+						url: fundraiser_url,
 						amount: raised_amount
 					};
 					
