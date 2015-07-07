@@ -8,8 +8,6 @@ var Counselor = require('./public/models/counselor')
 
 var port = process.env.PORT || 8080;
 
-request.setTimeout(90000);
-
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
@@ -76,10 +74,8 @@ app.get('/api/getAll', function(req,res){
 	});
 });
 
-app.get('/api/scrape', function(req, res){
-	var leaderboard = [];
-	completed_request = 0;
-
+var minutes = 5, the_interval = minutes * 60 * 1000;
+setInterval(function() {
 	fs.readFile('urls.txt', function(err, data) {
 		if(err) throw err;
 		var array = data.toString().split("\n");
@@ -121,7 +117,8 @@ app.get('/api/scrape', function(req, res){
 			});
 		}
 	});
-});
+
+})
 
 app.listen(port, function(){
 	console.log('Our app is running on http://localhost:' + port);

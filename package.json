@@ -9,6 +9,8 @@
 		"request"	: "latest",
 		"fs"		: "latest",
 		"ejs"		: "latest",
-		"cheerio"	: "latest"
+		"cheerio"	: "latest",
+		"mongoose"	: "latest",
+		"mongodb-uri" : "latest"
 	}
 }
