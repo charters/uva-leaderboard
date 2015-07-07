@@ -3,7 +3,7 @@ var leaderboardApp = angular.module('leaderboardApp', []);
 leaderboardApp.controller('leaderboardCtrl', function($scope, $http){
 
 	$scope.update = function() {
-		$http.get('/api/scrape')
+		$http.get('/api/scrape', [{timeout: 90000}])
 		.success(function(data){
 			console.log('All users updated successfully.');
 			$http.get('/api/getAll')
