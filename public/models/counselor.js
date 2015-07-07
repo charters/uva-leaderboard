@@ -1,12 +1,15 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var uriUtil = require('mongodb-uri');
-console.log(process.env.MONGOLAB_URI);
+
 var mongodbUri = process.env.MONGOLAB_URI;
 
 var mongooseUri = uriUtil.formatMongoose(mongodbUri);
 
-mongoose.connect(mongooseUri);
+var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 90000 } }, 
+                replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 90000 } } };    
+
+mongoose.connect(mongooseUri, options);
 
 var counselorSchema = new Schema({
 	name: String,
