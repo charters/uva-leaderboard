@@ -10,15 +10,8 @@ leaderboardApp.controller('leaderboardCtrl', function($scope, $http){
 			for (var i = 0; i < $scope.leaders.length; i++){
 				total += $scope.leaders[i].raised_amount;
 			}
-			$scope.progress = total/5000;
+			var c = this;
+			c.progress = total/5000;
 		})
-	}
-
-	$scope.getTotal = function(){
-		var total = 0;
-		for (var i = 0; i < $scope.leaders.length; i++){
-			total += $scope.leaders[i].raised_amount;
-		}
-		return total/5000;
 	}
 });
