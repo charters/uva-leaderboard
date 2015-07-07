@@ -8,10 +8,9 @@ leaderboardApp.controller('leaderboardCtrl', function($scope, $http){
 			$scope.leaders = res.data;
 			var total = 0;
 			for (var i = 0; i < $scope.leaders.length; i++){
-				total += $scope.leaders[i].raised_amount;
+				total += $scope.leaders[i].amount_raised;
 			}
-			console.log(total);
-			$scope.progress = (total/5000 * 100) + '%';
+			$scope.progress = (total/7000 * 100) + '%';
 		})
 	}
 });
