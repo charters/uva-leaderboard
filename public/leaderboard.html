@@ -57,10 +57,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="leader in leaders | orderBy:'amount':true">
+          <tr ng-repeat="leader in leaders | orderBy:'amount_raised':true">
             <td>{{$index + 1}}</td>
             <td>{{leader.name}}</td>
-            <td>{{leader.amount}}</td>
+            <td>{{leader.amount_raised}}</td>
             <td><a ng-href="{{leader.url}}" class="btn btn-success btn-sm">Donate to {{leader.name}}</a></td>
           </tr>
         </tbody>
