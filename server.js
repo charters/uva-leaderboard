@@ -74,8 +74,10 @@ app.get('/api/getAll', function(req,res){
 	});
 });
 
-var minutes = 5, the_interval = minutes * 60 * 1000;
-setInterval(function() {
+app.get('/api/scrape', function(req, res){
+	var leaderboard = [];
+	completed_request = 0;
+
 	fs.readFile('urls.txt', function(err, data) {
 		if(err) throw err;
 		var array = data.toString().split("\n");
@@ -111,14 +113,13 @@ setInterval(function() {
 					Counselor.findOneAndUpdate({ url: fundraiser_url }, {amount_raised: raised_amount}, function(err, counselor) {
 						if (err) throw err;
 
-						console.log(counselor);
+						console.log('Updated counselor with name: ' + fundraiser_name);
 					});
 				}
 			});
 		}
 	});
-
-})
+});
 
 app.listen(port, function(){
 	console.log('Our app is running on http://localhost:' + port);
