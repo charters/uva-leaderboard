@@ -8,6 +8,8 @@ var Counselor = require('./public/models/counselor')
 
 var port = process.env.PORT || 8080;
 
+request.setTimeout(90000);
+
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res){
