@@ -7,5 +7,13 @@ leaderboardApp.controller('leaderboardCtrl', function($scope, $http){
 		.then(function(res){
 			$scope.leaders = res.data;
 		})
-	};
+	}
+
+	$scope.getTotal = function(){
+		var total = 0;
+		for (var i = 0; i < $scope.leaders.length; i++){
+			total += $scope.leaders[i].raised_amount;
+		}
+		return total/5000;
+	}
 });
