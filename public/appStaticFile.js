@@ -10,6 +10,7 @@ leaderboardApp.controller('leaderboardCtrl', function($scope, $http){
 			for (var i = 0; i < $scope.leaders.length; i++){
 				total += $scope.leaders[i].raised_amount;
 			}
+			console.log(total);
 			$scope.progress = (total/5000 * 100) + '%';
 		})
 	}
