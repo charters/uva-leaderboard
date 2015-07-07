@@ -11,7 +11,13 @@ leaderboardApp.controller('leaderboardCtrl', function($scope, $http){
 					.error(function(data){
 						console.log('Error: ' + data);
 					})
-	};
+					.then(function(res){
+						$http.get('/api/getAll')
+						.then(function(res){
+							$scope.leaders = res.data;
+						})
+					})
+	}
 	$scope.initialize = function(){
 		$http.get('/api/getAll')
 		.then(function(res){
